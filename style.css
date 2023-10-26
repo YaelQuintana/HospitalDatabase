@@ -1,4 +1,7 @@
 
+body{
+    background-color: rgba(236, 236, 236, 0.829);
+}
 
 #login_container{
     position: absolute;
@@ -6,4 +9,30 @@
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 101;
+    background-color: white;
+    width: 420px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 30px 40px;
+}
+
+.input-box input{
+    width: 100%;
+    height: 100%;
+    /*border: none;*/
+    border: 2px solid rgba(255, 255, 255, .2);
+    outline: none;
+}
+
+#login_container .login_button{
+    width: 100%;
+    height: 45px;
+    outline: none;
+    border: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: aqua;
 }
