@@ -4,7 +4,7 @@ import jinja2
 # Connect to the database
 conn = psycopg2.connect(
     database="hospitaldb",
-    user="cryms",
+    user="hospitaladmin",
     password="1234",
     host="localhost",
     port=5432
