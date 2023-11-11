@@ -8,13 +8,20 @@
 <body>
     aquí se muestran todos los mancos
 
+    <div>
+        {% for row in data %}
+        <p>{{ row[0] }}</p>
+        <p>{{ row[1] }}</p>
+        {% endfor %}
+    </div>
+    <!--
     <div id="staff_data"></div>
     <script>
         import {html} from './connect.py';
 
-        document.getElementById('staff_data').innerHTML = html.html;
+        document.getElementById('staff_data').innerHTML = html.results;
     </script>
-
+    -->
       
 </body>
 </html>
