@@ -4,6 +4,9 @@ import jinja2
 
 app = Flask(__name__)
 
+###testeo
+
+
 # Connect to the database
 conn = psycopg2.connect(
     database="hospitaldb",
@@ -12,16 +15,34 @@ conn = psycopg2.connect(
     host="localhost",
     port=5432
 )
-cursor = conn.cursor()
+
+def get_connection():
+    return conn
+
+@app.get("/")
+def home():
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT 1 + 1")
+
+    result = cursor.fetchone()
+
+    print(result)
+
+    return 'Hello world'
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
 
 # Query the database
 
 
-@app.route("/", methods=["POST", "GET"])
-def display_table():
-    cursor.execute("SELECT name, status FROM staff")
-    results = cursor.fetchall()
-    return render_template("staff.html", data=results)
+#@app.route("/", methods=["POST", "GET"])
+#def display_table():
+#    cursor.execute("SELECT name, status FROM staff")
+#    results = cursor.fetchall()
+#    return render_template("staff.html", data=results)
 
 ## Pass data to HTML template
 #template = jinja2.Template("""
