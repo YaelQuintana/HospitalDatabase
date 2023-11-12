@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, send_file
 import psycopg2
 import jinja2
 
@@ -19,17 +19,31 @@ conn = psycopg2.connect(
 def get_connection():
     return conn
 
-@app.get("/")
-def home():
-    conn = get_connection()
+@app.get("/api/staff")
+def get_staff():
+    conn = get_connection(cursor_factory=psycopg2.extras.DictCursor)
     cursor = conn.cursor()
-    cursor.execute("SELECT 1 + 1")
+    cursor.execute("SELECT * FROM staff")
+    result = cursor.fetchall()
 
-    result = cursor.fetchone()
+    cursor.close()
+    conn.close()
 
-    print(result)
+#@app.get("/")
+#def home():
 
-    return 'Hello world'
+
+##@app.get("/")
+##def home():
+##    conn = get_connection()
+##    cursor = conn.cursor()
+##    cursor.execute("SELECT * FROM staff")
+##
+##    result = cursor.fetchone()
+##
+##    print(result)
+##
+##    return 'Hello world'
 
 if __name__ == "__main__":
     app.run(debug=True)
