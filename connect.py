@@ -2,6 +2,7 @@ import psycopg2
 import jinja2
 
 # Connect to the database
+##Se usara ese usuario y contrasenna../
 conn = psycopg2.connect(
     database="hospitaldb",
     user="hospitaladmin",
