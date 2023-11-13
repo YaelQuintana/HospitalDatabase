@@ -5,6 +5,6 @@ urlpatterns=[
     path('',index,name='index'),
     path('informes/',informes,name='informes'),
     path('staff/',staff,name='staff'),
-    path('medicamento/<int:medicamento_id>/',medicamento_detail,name='medicamento_detail'),
+    path('medicamento/<int:pk>/',medicamento_detail,name='medicamento_detail'),
 
 ]

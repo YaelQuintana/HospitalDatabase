@@ -6,14 +6,17 @@
     <title>Document</title>
 </head>
 <body>
-    aquí se muestran todos los mancos
-
-    <span class="text-primary float-end">${{ test.name }}.00</span>
+    aquí se muestran todos los Usuarios
+    {% for test in staff %}
+    <div class="card" style="width: 18rem;">
+       <br>
+    <span class="text-primary float-end">{{ test.id }}</span>
     <h5>{{ test.name }}</h5>
-    <p>{{ test.id }}</p>
+    <p>{{ test.descripcion }}</p>
     <a href="" class="btn btn-primary">Ver más</a>
-
-
+   <br>
+    </div>
+    {% endfor %}
       
 </body>
 </html>
