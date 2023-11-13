@@ -23,9 +23,20 @@ class Suministro(models.Model):
 
 class Equipo_Med(models.Model):
     name=models.CharField(max_length=255)
-    descripcion=models.TextField()
+    description=models.TextField()
     units=models.IntegerField()
     Last_Maint=models.DateField()
+    
+    class Meta:
+        verbose_name_plural="Equipos Medicos"
+        verbose_name="Equipo Medico"
+
+    def __str__(self):
+        return self.name
+
+    @property
+    def Equipo_name(self):
+        return self.name
 
 class Empleado(models.Model):
     pass

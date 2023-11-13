@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 ##from django.http import HttpResponse
 # Create your views here.
@@ -10,6 +10,24 @@ def index(request):
     }
     return render(request,'BDMedico/index.html',context)
 
+def informes(request):
+    equipos=Equipo_Med.objects.all()
+    suministros=Suministro.objects.all()
+    #Aqui se le pasan los datos al template
+    context={
+        'equipos':equipos,
+        'suministros':suministros
+    }
+    return render(request,'BDMedico/informes.html',context)
+
+def staff(request):
+    ##Query the database
+    staff= Test.objects.all()
+        # Pass data to HTML template
+    context={
+        'test':staff
+    }
+    return render(request,'BDMedico/staff.html',context)
 
 
 

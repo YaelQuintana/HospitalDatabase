@@ -7,5 +7,14 @@
 </head>
 <body>
     un informe
+    <div class="card">
+    {% for equipo in equipos %}
+    <span class="text-primary float-end">${{ equipo.units }}.00</span>
+    <h5>{{ equipo }}</h5>
+    <p>{{ equipo.description }}</p>
+    <h5>{{ equipo.Last_Maint }}</h5>
+    <a href="" class="btn btn-primary">Ver más</a>
+    {% endfor %}
+    </div>
 </body>
 </html>
