@@ -13,7 +13,7 @@ def index(request):
 def informes(request):
     equipos=Equipo_Med.objects.all()
     suministros=Suministro.objects.all()
-    #Aqui se le pasan los datos al template
+    #Here the data is passed to the template
     context={
         'equipos':equipos,
         'suministros':suministros
