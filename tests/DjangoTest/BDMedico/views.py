@@ -20,6 +20,13 @@ def informes(request):
     }
     return render(request,'BDMedico/informes.html',context)
 
+def medicamento_detail(request, medicamento_id):
+    medicamento = get_object_or_404(Medicamento, pk=medicamento_id)
+    # Fetch the object related to passed id
+    context = {
+        'medicamento': medicamento
+    }
+    return render(request,'BDMedico/medicamento_detail.html', context)
 def staff(request):
     ##Query the database
     staff= Test.objects.all()

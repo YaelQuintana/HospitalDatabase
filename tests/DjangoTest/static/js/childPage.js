@@ -1,5 +1,7 @@
 // Get menu links
 const links = document.querySelectorAll('.menu a');
+// childPage.js
+console.log("El archivo childPage.js se ha cargado exitosamente.");
 
 // Add click event to each link 
 links.forEach(link => {
