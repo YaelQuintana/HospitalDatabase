@@ -27,6 +27,15 @@ def medicamento_detail(request, pk):
         'medicamento': medicamento
     }
     return render(request,'BDMedico/medicamento_detail.html', context)
+
+def medicamento(request):
+    ##Query the database
+    medicamentos= Medicamento.objects.all()
+        # Pass data to HTML template
+    context={
+        'medicamentos':medicamentos
+    }
+    return render(request,'BDMedico/medicamento.html',context)
 def staff(request):
     ##Query the database
     staff= Test.objects.all()
