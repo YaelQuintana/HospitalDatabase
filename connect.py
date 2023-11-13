@@ -1,5 +1,5 @@
-from flask import Flask, render_template, request, send_file
-import psycopg2
+from flask import Flask, render_template, request, send_file, jsonify
+from psycopg2 import connect, extras
 import jinja2
 
 app = Flask(__name__)
@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 
 # Connect to the database
-conn = psycopg2.connect(
+conn = connect(
     database="hospitaldb",
     user="cryms",
     password="1234",
@@ -21,16 +21,21 @@ def get_connection():
 
 @app.get("/api/staff")
 def get_staff():
-    conn = get_connection(cursor_factory=psycopg2.extras.DictCursor)
-    cursor = conn.cursor()
+    conn = get_connection()
+    cursor = conn.cursor(cursor_factory= extras.DictCursor)
+
+
     cursor.execute("SELECT * FROM staff")
     result = cursor.fetchall()
-
+    
     cursor.close()
     conn.close()
 
-#@app.get("/")
-#def home():
+    return jsonify(result)
+
+@app.get("/")
+def home():
+    return send_file('static/index.html')
 
 
 ##@app.get("/")
@@ -93,4 +98,4 @@ if __name__ == "__main__":
 #    app.run(debug=True)
 
 # Close the database connection
-conn.close()
+#conn.close()
