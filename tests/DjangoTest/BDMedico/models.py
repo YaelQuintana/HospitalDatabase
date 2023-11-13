@@ -28,18 +28,5 @@ class Equipo_Med(models.Model):
     Last_Maint=models.DateField()
 
 class Empleado(models.Model):
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
+    pass
 
