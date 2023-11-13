@@ -30,3 +30,7 @@ class Equipo_Med(models.Model):
 class Empleado(models.Model):
     pass
 
+class Test(models.Model):
+    name=models.TextField()
+    descripcion=models.TextField()
+    

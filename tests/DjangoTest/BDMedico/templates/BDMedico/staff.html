@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    aquí se muestran todos los mancos
+
+    <div id="staff_data"></div>
+    <script >
+        import {html} from './connect.py';
+
+        document.getElementById('staff_data').innerHTML = html;
+    </script>
+    <form action="./connect.py"></form>
+
+      
+</body>
+</html>
