@@ -33,7 +33,7 @@ def medicamento(request):
     medicamentos= Medicamento.objects.all()
         # Pass data to HTML template
     context={
-        'medicamentos':medicamentos
+        'medicamento':medicamentos
     }
     return render(request,'BDMedico/medicamento.html',context)
 def staff(request):
