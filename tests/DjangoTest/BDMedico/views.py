@@ -3,7 +3,7 @@ from .models import *
 ##from django.http import HttpResponse
 # Create your views here.
 def index(request):
-    ##Aqui va los datos que leeera
+    ##Here is the data that will be read
     testss=Test.objects.all()
     context={
         'tests':testss
@@ -13,7 +13,7 @@ def index(request):
 def informes(request):
     equipos=Equipo_Med.objects.all()
     suministros=Suministro.objects.all()
-    #Aqui se le pasan los datos al template
+    #Here the data is passed to the template
     context={
         'equipos':equipos,
         'suministros':suministros
