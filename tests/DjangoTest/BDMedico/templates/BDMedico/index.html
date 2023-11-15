@@ -21,17 +21,20 @@
                 <a href="{% url 'informes' %}">Informes</a>
             </li>
             <li>
-                <a href="#">Configuración</a>
+                <a href="./admin/">Configuración</a>
             </li>
             <li>
                 <a href="{% url 'staff' %}">Staff</a>
             </li>
+            <li>
+                <a href="{%url 'medicamento' %}">Medicamentos</a>
+            </li>
         </ul>
     </div>
     
-    <div id="content">
-        <h1>Contenido del Dashboard</h1>
-        <script src="{% static 'BDMedico/childPage.js' %}"></script>
-    </div>
+    <script src="{% static 'BDMedico/childPage.js' %}"></script>
+   
+  
+
 </body>
 </html>
