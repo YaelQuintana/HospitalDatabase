@@ -88,7 +88,7 @@ DATABASES = {
         "NAME": "hospitaladb",
         "USER": "hospitaladmin",
         "PASSWORD": "1234",
-        "HOST": "201.142.178.185",
+        "HOST": "187.250.132.197",
         "PORT": "5432",
     }
 }
