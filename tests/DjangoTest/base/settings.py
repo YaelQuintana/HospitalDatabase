@@ -88,7 +88,7 @@ DATABASES = {
         "NAME": "hospitaladb",
         "USER": "hospitaladmin",
         "PASSWORD": "1234",
-        "HOST": "post4parra.crabdance.com",
+        "HOST": "post4parra.crabdance.com", ##HOST ALTERNATIVO: "post4parra.ddns.net"
         "PORT": "5432",
     }
 }
