@@ -32,7 +32,12 @@
         </ul>
     </div>
     
-    <script src="{% static 'BDMedico/childPage.js' %}"></script>
+    <div id = "content", name = "content", class = "main">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <!--script src="{% static 'BDMedico/childPage.js' %}"></script-->
    
   
 
