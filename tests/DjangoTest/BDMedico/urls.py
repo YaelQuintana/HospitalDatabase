@@ -7,5 +7,6 @@ urlpatterns=[
     path('staff/',staff,name='staff'),
     path('medicamento/<int:pk>/',medicamento_detail,name='medicamento_detail'),
     path('medicamento/',medicamento,name='medicamento'),
+    ##path('side_menu/',side_menu,name='side_menu'),
     
 ]
