@@ -1,35 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    {% extends '/home/cryms/HospitalProject/HospitalDatabase/tests/DjangoTest/BDMedico/templates/BDMedico/index.html' %}  
+    {% extends './index.html' %}  
     {% block content %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-</head>
+    </head>
 <body>
     
     <div class="row">
-        <br>
-        <h1>Medicamentos</h1>
-    {% for x in medicamento %}
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body">
-                <span class="text-primary float-end">$ {{ x.precio }}</span>
-                <h5>{{ x.name }}</h5>
-                <p>{{ x.descripcion }}</p>
-                <h4>LOTE:Caducidad</h4>
-                <h5>{{ x.LOTE }}:{{ x.expira }}</h5>
-                <a href="{% url 'medicamento_detail' x.id %}" class="btn btn-primary">Ver más</a>
-    
-    
-             </div>
+        <div class="col-md-12">
+            <h1 class="float-start">Medicamentos</h1>
+            <a href="{% url 'alta_medicamento' %}" class="btn btn-danger float-end">Agregar Medicamento</a>
         </div>
+        {% for x in medicamento %}
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <span class="text-primary float-end">$ {{ x.precio }}</span>
+                        <h5>{{ x.name }}</h5>
+                        <p>{{ x.descripcion }}</p>
+                        <h4>LOTE:Caducidad</h4>
+                        <h5>{{ x.LOTE }}:{{ x.expira }}</h5>
+                        <a href="{% url 'medicamento_detail' x.id %}" class="btn btn-primary">Ver más</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-    </div>
+    
     {% endblock %}
 </body>
 </html>

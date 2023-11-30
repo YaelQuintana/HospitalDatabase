@@ -9,6 +9,9 @@ class Medicamento(models.Model):
     LOTE=models.CharField(max_length=20)
     expira=models.DateField()
 
+    def __str__(self):
+        return self.name
+
 
 class Suministro(models.Model):
     name=models.CharField(max_length=255)

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <!--Cargar Archivos CSS y JS de forma statica-->
     {% load static %}
     <link rel="stylesheet" href="{%static 'BDMedico/css/dashboardStye.css' %}">
 </head>
@@ -12,7 +13,7 @@
         <div class="logo"></div>
         <ul class="menu">
             <li>
-                <a href="#">Dashboard</a>
+                <a href="{% url 'index' %}">Dashboard</a>
             </li>
             <li>
                 <a href="#">Gráficos</a>

@@ -1,0 +1,46 @@
+<!-- alta_medicamento.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    {% extends './index.html' %}
+    {% block content %}
+    <title>Alta de Medicamento</title>
+    {% load static %}
+    <link rel = "stylesheet" href = "{%static 'BDMedico/css/formStyle.css' %}">
+</head>
+<body>
+
+    <!--Englobar Form en un recuadro para alinear-->
+    <h2>Registrar Nuevo Medicamento</h2>
+    <form method="post" action="{% url 'alta_medicamento' %}">
+        {% csrf_token %}
+        
+        <div id = "campo">
+            <label for="{{ form.name.id_for_label }}">Nombre del Medicamento:</label>
+            {{ form.name }}
+        </div>
+        <br>
+        <div id = "campo">
+            <label for="{{ form.descripcion.id_for_label }}">Descripción:</label>
+            {{ form.descripcion }}
+        </div>
+        <br>
+        <div id = "campo">
+            <label for="{{ form.precio.id_for_label }}">Precio:</label>
+            {{ form.precio }}
+        </div>
+        <br>
+        <label for="{{ form.units.id_for_label }}">Unidades:</label>
+        {{ form.units }}
+        <br>
+        <label for="{{ form.LOTE.id_for_label }}">LOTE:</label>
+        {{ form.LOTE }}
+        <br>
+        <label for="{{ form.expira.id_for_label }}">Fecha de Caducidad:</label>
+        {{ form.expira }}
+        <br>
+        <button type="submit">Guardar</button>
+    </form>
+    {% endblock  %}
+</body>
+</html>
