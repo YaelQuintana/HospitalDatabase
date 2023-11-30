@@ -33,7 +33,7 @@ def medicamento_detail(request, pk):
     # Obtener el siguiente y anterior medicamento
     siguiente_medicamento = Medicamento.objects.filter(id__gt=medicamento.id).first()
     anterior_medicamento = Medicamento.objects.filter(id__lt=medicamento.id).last()
-
+    
      # Formulario para la edición
     if request.method == 'POST':
         form = MedicamentoForm(request.POST, instance=medicamento)
@@ -50,13 +50,6 @@ def medicamento_detail(request, pk):
         'anterior_medicamento': anterior_medicamento,
     })
 
-
-    # Pass data to HTML template
-    # Fetch the object related to passed id
-    # context = {
-    #     'medicamento': medicamento
-    # }
-    # return render(request,'BDMedico/medicamento_detail.html', context)
 
 ##Lista Todos los medicamentos de la BD
 def medicamento(request):
@@ -81,25 +74,27 @@ def alta_medicamento(request):
     return render(request, 'BDMedico/medicamento_alta.html', {'form': form})
 
 ##Edita Medicamento
-def edita_medicamento(request, pk):
-    medicamento = get_object_or_404(Medicamento, id=pk)
-    if request.method == 'POST':
-        form = MedicamentoForm(request.POST, instance=medicamento)
-        if form.is_valid():
-            form.save()
-            return redirect('medicamento')  # Redirige a la página de lista de medicamentos
-    else:
-        form = MedicamentoForm(instance=medicamento)
-        return render(request,'medicamento_edita.html', {'form': form})
+def medicamento_editar(request, pk):
+    medicamento = get_object_or_404(Medicamento, pk=pk)
+
+    # Obtener el siguiente y anterior medicamento
+    siguiente_medicamento = Medicamento.objects.filter(id__gt=medicamento.id).first()
+    anterior_medicamento = Medicamento.objects.filter(id__lt=medicamento.id).last()
     
+    form = MedicamentoForm(instance=medicamento)
+
+    return render(request, 'BDMedico/medicamento_edita.html', {
+        'medicamento': medicamento,
+        'form': form,
+        'siguiente_medicamento': siguiente_medicamento,
+        'anterior_medicamento': anterior_medicamento,
+    })
     ##Baja Medicamento
-def baja_medicamento(request, pk):
+def medicamento_eliminar(request, pk):
     medicamento = get_object_or_404(Medicamento, id=pk)
-    if request.method == 'POST':
-        medicamento.delete()
-        return redirect('medicamento')  # Redirige a la página de lista de medicamentos
-    else:
-        return render(request,'medicamento_baja.html', {'medicamento': medicamento})
+    medicamento.delete()
+    return redirect('medicamento')  # Redirige a la página de lista de medicamentos
+    
 
 
 # endregion

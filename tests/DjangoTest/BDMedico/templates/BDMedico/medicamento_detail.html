@@ -30,15 +30,30 @@
         {% if anterior_medicamento %}
         <a href="{% url 'medicamento_detail' pk=anterior_medicamento.pk %}" class="btn btn-outline-primary">Anterior</a>
         {% endif %}
-        {% if not editar_modo %}
         <a href="" class="btn btn-info">Actualizar</a>
-        <a href="#" class="btn btn-warning" id="btn-editar">Editar</a>
-        {% else %}
-        <a href="" class="btn btn-warning">Cancelar</a>
-        <a href="#" class="btn btn-success" id="btn-guardar">Guardar</a>
-        {% endif %}
-        <a href="" class="btn btn-danger">Eliminar</a>
-        {% if siguiente_medicamento %}
+        <a href="{% url 'medicamento_editar' pk=medicamento.pk %}" class="btn btn-warning" id="btn-editar">Editar</a>
+        <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmarEliminacion">Eliminar</a>
+
+<!-- Modal de confirmación de eliminación -->
+<div class="modal fade" id="confirmarEliminacion" tabindex="-1" aria-labelledby="confirmarEliminacionLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmarEliminacionLabel">Confirmar Eliminación</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ¿Estás seguro de que deseas eliminar este medicamento?
+            </div>
+            <div class="modal-footer">
+                <!-- Agrega el enlace para eliminar el medicamento -->
+                <a href="{% url 'medicamento_eliminar' pk=medicamento.pk %}" class="btn btn-danger">Eliminar</a>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>{% if siguiente_medicamento %}
         <a href="{% url 'medicamento_detail' pk=siguiente_medicamento.pk %}"
           class="btn btn-outline-primary">Siguiente</a>
         {% endif %}
@@ -46,45 +61,6 @@
 
       <a href="{% url 'medicamento' %}" class="btn btn-primary">Volver</a>
     </div>
-
-    <!-- #region Formulario de edición -->
-    <form method="post" action="{% url 'medicamento_detail' pk=medicamento.pk %}" id="formulario-edicion">
-      {% csrf_token %}
-      <div id="campo">
-        <label for="{{ form.name.id_for_label }}">Nombre del Medicamento:</label>
-        {{ form.name }}
-      </div>
-      <br>
-      <div id="campo">
-        <label for="{{ form.descripcion.id_for_label }}">Descripción:</label>
-        {{ form.descripcion }}
-      </div>
-      <br>
-      <div id="campo">
-        <label for="{{ form.precio.id_for_label }}">Precio:</label>
-        {{ form.precio }}
-      </div>
-      <br>
-      <div id="campo">
-        <label for="{{ form.units.id_for_label }}">Unidades:</label>
-        {{ form.units }}
-      </div>
-      <br>
-      <div id="campo">
-        <label for="{{ form.LOTE.id_for_label }}">LOTE:</label>
-        {{ form.LOTE }}
-      </div>
-      <br>
-      <div id="campo">
-        <label for="{{ form.expira.id_for_label }}">Fecha de Caducidad:</label>
-        {{ form.expira }}
-      </div>
-      <br>
-
-      <button type="submit" id="btn-guardar">Guardar cambios</button>
-    </form>
-
-    <!-- #endregion -->
 
     {% endblock %}
 
