@@ -30,16 +30,24 @@
             {{ form.precio }}
         </div>
         <br>
-        <label for="{{ form.units.id_for_label }}">Unidades:</label>
-        {{ form.units }}
+        <div id = "campo">
+            <label for="{{ form.units.id_for_label }}">Unidades:</label>
+            {{ form.units }}
+        </div>
         <br>
-        <label for="{{ form.LOTE.id_for_label }}">LOTE:</label>
-        {{ form.LOTE }}
+        <div id = "campo">
+            <label for="{{ form.LOTE.id_for_label }}">LOTE:</label>
+            {{ form.LOTE }}
+        </div>
         <br>
-        <label for="{{ form.expira.id_for_label }}">Fecha de Caducidad:</label>
-        {{ form.expira }}
+        <div id = "campo">
+            <label for="{{ form.expira.id_for_label }}">Fecha de Caducidad:</label>
+            {{ form.expira }}
+        </div>
         <br>
-        <button type="submit">Guardar</button>
+        <div>
+            <button class="btn btn-primary" type="submit">Guardar</button>
+        </div>
     </form>
     {% endblock  %}
 </body>
