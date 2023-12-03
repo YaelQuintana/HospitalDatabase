@@ -64,6 +64,7 @@ INSTALLED_APPS = SHARED_APPS +[shared for shared in TENANT_APPS if shared not in
     #'BDMedico',
 
 MIDDLEWARE = [
+    'django_tenants.middleware.main.TenantMainMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -107,10 +108,10 @@ WSGI_APPLICATION = 'base.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django_tenants.postgresql_backend", #django.db.backends.postgresql
-        "NAME": "hospitaldb",
-        "USER": "hospitaladmin",
+        "NAME": "hospitaladb",
+        "USER": "cryms",
         "PASSWORD": "1234",
-        "HOST": "localhost", #post4parra.ddns.net # "post4parra.crabdance.com", ##HOST ALTERNATIVO: "post4parra.ddns.net"
+        "HOST": "127.0.0.1", #post4parra.ddns.net # "post4parra.crabdance.com", ##HOST ALTERNATIVO: "post4parra.ddns.net"
         "PORT": "5432",
     }
 }
