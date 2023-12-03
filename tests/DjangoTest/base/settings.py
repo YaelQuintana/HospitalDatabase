@@ -30,16 +30,38 @@ ALLOWED_HOSTS = []
 ##SUPER USER: AdminMamador: Ultramamadas
 # Application definition
 
-INSTALLED_APPS = [
+SHARED_APPS = [
+    'django_tenants',
+    'shared',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #'BDMedico',
+
+]
+
+TENANT_APPS = [
+    #*'django.contrib.admin',
+    #'django.contrib.auth',
+    #'django.contrib.contenttypes',
+    #'django.contrib.sessions',
+    #'django.contrib.messages',
+    #'django.contrib.staticfiles',
     'BDMedico',
 
 ]
+
+INSTALLED_APPS = SHARED_APPS +[shared for shared in TENANT_APPS if shared not in SHARED_APPS]
+#'django.contrib.admin',
+    #'django.contrib.auth',
+    #'django.contrib.contenttypes',
+    #'django.contrib.sessions',
+    #'django.contrib.messages',
+    #'django.contrib.staticfiles',
+    #'BDMedico',
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -84,14 +106,19 @@ WSGI_APPLICATION = 'base.wsgi.application'
 # }
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
+        "ENGINE": "django_tenants.postgresql_backend", #django.db.backends.postgresql
         "NAME": "hospitaladb",
         "USER": "hospitaladmin",
         "PASSWORD": "1234",
-        "HOST": "post4parra.ddns.net", # "post4parra.crabdance.com", ##HOST ALTERNATIVO: "post4parra.ddns.net"
+        "HOST": "localhost", #post4parra.ddns.net # "post4parra.crabdance.com", ##HOST ALTERNATIVO: "post4parra.ddns.net"
         "PORT": "5432",
     }
 }
+
+DATABASE_ROUTERS = (
+    'django_tenants.routers.TenantSyncRouter',
+)
+
 #Check de LOG
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
