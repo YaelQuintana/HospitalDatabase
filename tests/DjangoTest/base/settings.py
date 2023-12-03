@@ -107,7 +107,7 @@ WSGI_APPLICATION = 'base.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django_tenants.postgresql_backend", #django.db.backends.postgresql
-        "NAME": "hospitaladb",
+        "NAME": "hospitaldb",
         "USER": "hospitaladmin",
         "PASSWORD": "1234",
         "HOST": "localhost", #post4parra.ddns.net # "post4parra.crabdance.com", ##HOST ALTERNATIVO: "post4parra.ddns.net"
@@ -164,3 +164,7 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+TENANT_MODEL = "shared.Client"
+
+TENANT_DOMAIN_MODEL = "shared.Domain"
