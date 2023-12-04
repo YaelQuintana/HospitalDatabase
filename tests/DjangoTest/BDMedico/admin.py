@@ -9,9 +9,9 @@ class Medicamentdmin(admin.ModelAdmin):
 class SuministroAdmin(admin.ModelAdmin):
     list_display=('name',)
 
-@admin.register(Equipo_Med)    
-class Equipo_MedAdmin(admin.ModelAdmin):
-    list_display=('name',)
+@admin.register(Empleados)
+class EmpleadosAdmin(admin.ModelAdmin):
+    list_display=('username',)
 
 @admin.register(Test)    
 class TestAdmin(admin.ModelAdmin):

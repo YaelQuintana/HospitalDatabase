@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% extends '../index.html' %}  
+    {% block content %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    </head>
+<body>
+    
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="float-start">Suministros</h1>
+            <a href="{% url 'alta_suministro' %}" class="btn btn-danger float-end">Agregar suministro</a>
+        </div>
+        {% for x in suministro %}
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <span class="text-primary float-end">$ {{ x.precio }}</span>
+                        <h5>{{ x.name }}</h5>
+                        <p>{{ x.descripcion }}</p>
+                        <h4>LOTE:Caducidad</h4>
+                        <h5>{{ x.LOTE }}:{{ x.expira }}</h5>
+                        <a href="{% url 'suministro_detail' x.id %}" class="btn btn-primary">Ver más</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    
+    {% endblock %}
+</body>
+</html>

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
-from .forms import MedicamentoForm, EmpleadoForm
+from .forms import MedicamentoForm, EmpleadoForm, SuministroForm
 
 ##from django.http import HttpResponse
 # Create your views here.
@@ -15,11 +15,11 @@ def index(request):
     return render(request,'index.html',context)
 
 def informes(request):
-    equipos=Equipo_Med.objects.all()
+    medicamento=Medicamento.objects.all()
     suministros=Suministro.objects.all()
     #Here the data is passed to the template
     context={
-        'equipos':equipos,
+        'medicamento':medicamento,
         'suministros':suministros
     }
     return render(request,'BDMedico/informes.html',context)
@@ -176,5 +176,80 @@ def empleado_eliminar(request, pk):
     empleado.delete()
     return redirect('empleado')  # Redirige a la página de lista de empleados
     
+# endregion
+
+
+# region suministro
+
+##Detalle
+def suministro_detail(request, pk):
+    suministro = get_object_or_404(Suministro, pk=pk)
+
+    # Obtener el siguiente y anterior suministro
+    siguiente_suministro = Suministro.objects.filter(id__gt=suministro.id).first()
+    anterior_suministro = Suministro.objects.filter(id__lt=suministro.id).last()
+    
+     # Formulario para la edición
+    if request.method == 'POST':
+        form = SuministroForm(request.POST, instance=suministro)
+        if form.is_valid():
+            form.save()
+            return redirect('suministro_detail', pk=pk)
+    else:
+        form = SuministroForm(instance=suministro)
+
+    return render(request, 'Suministro/suministro_detail.html', {
+        'suministro': suministro,
+        'form': form,
+        'siguiente_suministro': siguiente_suministro,
+        'anterior_suministro': anterior_suministro,
+    })
+
+
+##Lista Todos los suministros de la BD
+def suministro(request):
+    ##Query the database
+    suministros= Suministro.objects.all()
+        # Pass data to HTML template
+    context={
+        'suministro':suministros
+    }
+    return render(request,'Suministro/suministro.html',context)
+
+##Alta suministro
+def alta_suministro(request):
+    if request.method == 'POST':
+        form = SuministroForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('suministro')  # Redirige a la página de lista de suministros
+    else:
+        form = SuministroForm()
+    return render(request, 'Suministro/suministro_alta.html', {'form': form})
+
+##Edita suministro
+def suministro_editar(request, pk):
+    suministro = get_object_or_404(Suministro, pk=pk)
+
+    # Obtener el siguiente y anterior suministro
+    siguiente_suministro = Suministro.objects.filter(id__gt=suministro.id).first()
+    anterior_suministro = Suministro.objects.filter(id__lt=suministro.id).last()
+    
+    form = SuministroForm(instance=suministro)
+
+    return render(request, 'Suministro/suministro_edita.html', {
+        'suministro': suministro,
+        'form': form,
+        'siguiente_suministro': siguiente_suministro,
+        'anterior_suministro': anterior_suministro,
+    })
+    ##Baja suministro
+def suministro_eliminar(request, pk):
+    suministro = get_object_or_404(Suministro, id=pk)
+    suministro.delete()
+    return redirect('suministro')  # Redirige a la página de lista de suministros
+    
+
+
 # endregion
 

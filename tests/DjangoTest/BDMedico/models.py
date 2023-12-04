@@ -21,28 +21,11 @@ class Suministro(models.Model):
     units=models.IntegerField()
     precio=models.DecimalField(decimal_places=2, max_digits=10)
     LOTE=models.CharField(max_length=20)
-    expira=models.DateField()
+    expira=models.DateField(null=True)
     desechable=models.BooleanField(default=True)
 
 
 
-class Equipo_Med(models.Model):
-    id=models.AutoField(primary_key=True)
-    name=models.CharField(max_length=255)
-    description=models.TextField()
-    units=models.IntegerField()
-    Last_Maint=models.DateField()
-    
-    class Meta:
-        verbose_name_plural="Equipos Medicos"
-        verbose_name="Equipo Medico"
-
-    def __str__(self):
-        return self.name
-
-    @property
-    def Equipo_name(self):
-        return self.name
     
 
 class Empleados(models.Model):
@@ -60,6 +43,34 @@ class Empleados(models.Model):
     contratacion_date = models.DateTimeField(auto_now_add=True, blank=True)
     cedula = models.CharField(max_length=255)
 
+
+    SEXO_CHOICES = [
+        ('M', 'Masculino'),
+        ('F', 'Femenino'),
+        ('O', 'Otro'),
+    ]
+    sex = models.CharField(max_length=1, choices=SEXO_CHOICES)
+
+
+    PUESTO_CHOICES = [
+        ('admin', 'Administrador'),
+        ('empleado', 'Empleado'),
+        ('medico', 'Medico'),
+        ('recepcionista', 'Recepcionista'),
+        ('farmaceutico', 'Farmaceutico'),
+        ('enfermeria', 'Enfermeria'),
+        ('jardinero', 'Jardinero'),
+        ('gerente', 'Gerente'),
+        ('supervisor', 'Supervisor'),
+        ('tecnico', 'Técnico'),
+        ('asistente', 'Asistente'),
+        ('auxiliar', 'Auxiliar'),
+        ('conserje', 'Conserje'),
+        ('otro', 'Otro'),
+
+        # Agrega más opciones según tus necesidades
+    ]
+    puesto = models.CharField(max_length=20, choices=PUESTO_CHOICES)
     def __str__(self):
         return self.name
     

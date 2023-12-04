@@ -1,0 +1,59 @@
+<!-- alta_suministro.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    {% extends '../index.html' %}
+    {% block content %}
+    <title>Alta de suministro</title>
+    {% load static %}
+    <link rel = "stylesheet" href = "{%static 'BDMedico/css/formStyle.css' %}">
+</head>
+<body>
+
+    <!--Englobar Form en un recuadro para alinear-->
+    <h2>Registrar Nuevo suministro</h2>
+    <form method="post" action="{% url 'alta_suministro' %}">
+        {% csrf_token %}
+        
+        <div id = "campo">
+            <label for="{{ form.name.id_for_label }}">Nombre del suministro:</label>
+            {{ form.name }}
+        </div>
+        <br>
+        <div id = "campo">
+            <label for="{{ form.descripcion.id_for_label }}">Descripción:</label>
+            {{ form.descripcion }}
+        </div>
+        <br>
+        <div id = "campo">
+            <label for="{{ form.precio.id_for_label }}">Precio:</label>
+            {{ form.precio }}
+        </div>
+        <br>
+        <div id = "campo">
+            <label for="{{ form.units.id_for_label }}">Unidades:</label>
+            {{ form.units }}
+        </div>
+        <br>
+        <div id = "campo">
+            <label for="{{ form.LOTE.id_for_label }}">LOTE:</label>
+            {{ form.LOTE }}
+        </div>
+        <br>
+        <div id = "campo">
+            <label for="{{ form.expira.id_for_label }}">Fecha de Caducidad:</label>
+            {{ form.expira }}
+        </div>
+        <br>
+        <div id = "campo">
+            <label for="{{ form.desechable.id_for_label }}">Desechable:</label>
+            {{ form.desechable }}
+        </div>
+        <br>
+        <div>
+            <button class="btn btn-primary" type="submit">Guardar</button>
+        </div>
+    </form>
+    {% endblock  %}
+</body>
+</html>

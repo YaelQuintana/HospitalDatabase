@@ -17,4 +17,12 @@ urlpatterns=[
     path('medicamento/',medicamento,name='medicamento'),
     ##path('side_menu/',side_menu,name='side_menu'),
     
+
+    path('suministro/<int:pk>/',suministro_detail,name='suministro_detail'),
+    path('suministro/<int:pk>/editar/', suministro_editar, name='suministro_editar'),
+    path('suministro/<int:pk>/eliminar/', suministro_eliminar, name='suministro_eliminar'),
+    path('suministro/nuevo/',alta_suministro,name='alta_suministro'),
+    path('suministro/',suministro,name='suministro'),
+
+
 ]

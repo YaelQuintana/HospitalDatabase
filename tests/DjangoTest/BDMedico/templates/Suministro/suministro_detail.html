@@ -1,0 +1,70 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+  {% extends '../index.html' %}
+  {% block content %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<div class="container">
+  <h2>Detalles del suministro</h2>
+
+  <body>
+    <div class="card">
+      <span class="text-primary float-end"></span>
+      <div class="card">
+        <p>Nombre: {{ suministro.name }}</p>
+        <p>Descripción: {{ suministro.descripcion }}</p>
+        <p>Precio: $ {{ suministro.precio }}</p>
+        <p>Existencia: {{ suministro.units }} Unidades</p>
+        <p>Lote: {{ suministro.LOTE }}</p>
+        <p>Caducidad: {{ suministro.expira }}</p>
+        <p>Caducidad: {{ suministro.desechable }}</p>
+
+      </div>
+
+      <div align="center">
+        <!-- Botones de navegar -->
+        {% if anterior_suministro %}
+        <a href="{% url 'suministro_detail' pk=anterior_suministro.pk %}" class="btn btn-outline-primary">Anterior</a>
+        {% endif %}
+        <a href="" class="btn btn-info">Actualizar</a>
+        <a href="{% url 'suministro_editar' pk=suministro.pk %}" class="btn btn-warning" id="btn-editar">Editar</a>
+        <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmarEliminacion">Eliminar</a>
+
+<!-- Modal de confirmación de eliminación -->
+<div class="modal fade" id="confirmarEliminacion" tabindex="-1" aria-labelledby="confirmarEliminacionLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmarEliminacionLabel">Confirmar Eliminación</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ¿Estás seguro de que deseas eliminar este suministro?
+            </div>
+            <div class="modal-footer">
+                <!-- Agrega el enlace para eliminar el suministro -->
+                <a href="{% url 'suministro_eliminar' pk=suministro.pk %}" class="btn btn-danger">Eliminar</a>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>{% if siguiente_suministro %}
+        <a href="{% url 'suministro_detail' pk=siguiente_suministro.pk %}"
+          class="btn btn-outline-primary">Siguiente</a>
+        {% endif %}
+      </div>
+
+      <a href="{% url 'suministro' %}" class="btn btn-primary">Volver</a>
+    </div>
+
+    {% endblock %}
+
+  </body>
+
+</html>
