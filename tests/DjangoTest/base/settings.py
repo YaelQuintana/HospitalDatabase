@@ -39,32 +39,32 @@ SHARED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'tenant_schemas',
     #'BDMedico',
 
 ]
 
 TENANT_APPS = [
-    "BDMedico",
-    "shared",
+    #*'django.contrib.admin',
+    #'django.contrib.auth',
+    #'django.contrib.contenttypes',
+    #'django.contrib.sessions',
+    #'django.contrib.messages',
+    #'django.contrib.staticfiles',
+    'BDMedico',
+
 ]
 
-INSTALLED_APPS = SHARED_APPS + [shared for shared in TENANT_APPS if shared not in SHARED_APPS]
-    # 'django.contrib.admin',
-    # 'django.contrib.auth',
-    # 'django.contrib.contenttypes',
-    # 'django.contrib.sessions',
-    # 'django.contrib.messages',
-    # 'django.contrib.staticfiles',
-    # 'BDMedico',
-    # 'django_tenants',
-    # 'tenant_schemas',
-
-
+INSTALLED_APPS = SHARED_APPS +[shared for shared in TENANT_APPS if shared not in SHARED_APPS]
+#'django.contrib.admin',
+    #'django.contrib.auth',
+    #'django.contrib.contenttypes',
+    #'django.contrib.sessions',
+    #'django.contrib.messages',
+    #'django.contrib.staticfiles',
+    #'BDMedico',
 
 MIDDLEWARE = [
     'django_tenants.middleware.main.TenantMainMiddleware',
-    
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -72,8 +72,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'tenant_schemas.middleware.TenantMiddleware',
-    'tenant_schemas.middleware.TenantSubfolderMiddleware',
 ]
 
 ROOT_URLCONF = 'base.urls'
@@ -109,14 +107,15 @@ WSGI_APPLICATION = 'base.wsgi.application'
 # }
 DATABASES = {
     "default": {
-        'ENGINE': 'django_tenants.postgresql_backend', #django.db.backends.postgresql
+        "ENGINE": "django_tenants.postgresql_backend", #django.db.backends.postgresql
         "NAME": "hospitaladb",
         "USER": "hospitaladmin",
         "PASSWORD": "1234",
-        "HOST": "post4parra.ddns.net", # "post4parra.crabdance.com", ##HOST ALTERNATIVO: "post4parra.ddns.net"
+        "HOST": "rolling-corp.net", #post4parra.ddns.net #  ##HOST ALTERNATIVO: "post4parra.ddns.net"
         "PORT": "5432",
     }
 }
+
 DATABASE_ROUTERS = (
     'django_tenants.routers.TenantSyncRouter',
 )
@@ -146,7 +145,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'America/Tijuana'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 

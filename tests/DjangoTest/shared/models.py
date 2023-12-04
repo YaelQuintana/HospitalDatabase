@@ -1,6 +1,5 @@
 from django.db import models
 from django_tenants.models import TenantMixin, DomainMixin
-from django_tenants.models import TenantManager, DomainManager
 
 class Client(TenantMixin):
     name = models.CharField(max_length=100)
