@@ -30,18 +30,41 @@ ALLOWED_HOSTS = []
 ##SUPER USER: AdminMamador: Ultramamadas
 # Application definition
 
-INSTALLED_APPS = [
+SHARED_APPS = [
+    'django_tenants',
+    'shared',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'BDMedico',
+    'tenant_schemas',
+    #'BDMedico',
 
 ]
 
+TENANT_APPS = [
+    "BDMedico",
+    "shared",
+]
+
+INSTALLED_APPS = SHARED_APPS + [shared for shared in TENANT_APPS if shared not in SHARED_APPS]
+    # 'django.contrib.admin',
+    # 'django.contrib.auth',
+    # 'django.contrib.contenttypes',
+    # 'django.contrib.sessions',
+    # 'django.contrib.messages',
+    # 'django.contrib.staticfiles',
+    # 'BDMedico',
+    # 'django_tenants',
+    # 'tenant_schemas',
+
+
+
 MIDDLEWARE = [
+    'django_tenants.middleware.main.TenantMainMiddleware',
+    
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -49,6 +72,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'tenant_schemas.middleware.TenantMiddleware',
+    'tenant_schemas.middleware.TenantSubfolderMiddleware',
 ]
 
 ROOT_URLCONF = 'base.urls'
@@ -84,7 +109,7 @@ WSGI_APPLICATION = 'base.wsgi.application'
 # }
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
+        'ENGINE': 'django_tenants.postgresql_backend', #django.db.backends.postgresql
         "NAME": "hospitaladb",
         "USER": "hospitaladmin",
         "PASSWORD": "1234",
@@ -92,6 +117,10 @@ DATABASES = {
         "PORT": "5432",
     }
 }
+DATABASE_ROUTERS = (
+    'django_tenants.routers.TenantSyncRouter',
+)
+
 #Check de LOG
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -137,3 +166,7 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+TENANT_MODEL = "shared.Client"
+
+TENANT_DOMAIN_MODEL = "shared.Domain"
