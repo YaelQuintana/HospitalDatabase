@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
-from .forms import MedicamentoForm
+from .forms import MedicamentoForm, EmpleadoForm
 
 ##from django.http import HttpResponse
 # Create your views here.
@@ -12,7 +12,7 @@ def index(request):
     context={
         'tests':testss
     }
-    return render(request,'BDMedico/index.html',context)
+    return render(request,'index.html',context)
 
 def informes(request):
     equipos=Equipo_Med.objects.all()
@@ -43,7 +43,7 @@ def medicamento_detail(request, pk):
     else:
         form = MedicamentoForm(instance=medicamento)
 
-    return render(request, 'BDMedico/medicamento_detail.html', {
+    return render(request, 'Medicamento/medicamento_detail.html', {
         'medicamento': medicamento,
         'form': form,
         'siguiente_medicamento': siguiente_medicamento,
@@ -59,7 +59,7 @@ def medicamento(request):
     context={
         'medicamento':medicamentos
     }
-    return render(request,'BDMedico/medicamento.html',context)
+    return render(request,'Medicamento/medicamento.html',context)
 
 ##Alta Medicamento
 def alta_medicamento(request):
@@ -71,7 +71,7 @@ def alta_medicamento(request):
     else:
         form = MedicamentoForm()
 
-    return render(request, 'BDMedico/medicamento_alta.html', {'form': form})
+    return render(request, 'Medicamento/medicamento_alta.html', {'form': form})
 
 ##Edita Medicamento
 def medicamento_editar(request, pk):
@@ -83,7 +83,7 @@ def medicamento_editar(request, pk):
     
     form = MedicamentoForm(instance=medicamento)
 
-    return render(request, 'BDMedico/medicamento_edita.html', {
+    return render(request, 'Medicamento/medicamento_edita.html', {
         'medicamento': medicamento,
         'form': form,
         'siguiente_medicamento': siguiente_medicamento,
@@ -100,13 +100,81 @@ def medicamento_eliminar(request, pk):
 # endregion
 
 
+# region Empleado
 
-def staff(request):
+##Detalle
+def empleado_detail(request, pk):
+    empleado = get_object_or_404(Empleados, pk=pk)
+
+    # Obtener el siguiente y anterior empleado
+    siguiente_empleado = Empleados.objects.filter(username__gt=empleado.username).order_by('username').first()
+    anterior_empleado = Empleados.objects.filter(username__lt=empleado.username).order_by('-username').first()
+    
+    # Formulario para la edición
+    if request.method == 'POST':
+        form = EmpleadoForm(request.POST, instance=empleado)
+        if form.is_valid():
+            # Excluye el campo 'username' para evitar que se edite
+            form.fields['username'].widget.attrs['readonly'] = True
+            form.save()
+            return redirect('empleado_detail', pk=pk)
+    else:
+        form = EmpleadoForm(instance=empleado)
+        # Excluye el campo 'username' para evitar que se edite
+        form.fields['username'].widget.attrs['readonly'] = True
+
+    return render(request, 'Empleado/empleado_detail.html', {
+        'empleado': empleado,
+        'form': form,
+        'siguiente_empleado': siguiente_empleado,
+        'anterior_empleado': anterior_empleado,
+    })
+
+
+def empleado(request):
     ##Query the database
-    staff= Test.objects.all()
+    empleado= Empleados.objects.all()
         # Pass data to HTML template
     context={
-        'staff':staff
+        'empleado':empleado
     }
-    return render(request,'BDMedico/staff.html',context)
+    return render(request,'Empleado/staff.html',context)
+
+##Alta staff
+def alta_empleado(request):
+    if request.method == 'POST':
+        form = EmpleadoForm(request.POST)
+        if form.is_valid():
+
+            username = form.cleaned_data['username'].lower()
+            password = form.cleaned_data['password'].lower()
+            form.save()
+            return redirect('empleado')  # Redirige a la página de lista de empleados
+    else:
+        form = EmpleadoForm()
+    return render(request, 'Empleado/empleado_alta.html', {'form': form})
+
+##Edita empleado
+def empleado_editar(request, pk):
+    empleado = get_object_or_404(Empleados, pk=pk)
+
+   # Obtener el siguiente y anterior empleado
+    siguiente_empleado = Empleados.objects.filter(username__gt=empleado.username).order_by('username').first()
+    anterior_empleado = Empleados.objects.filter(username__lt=empleado.username).order_by('-username').first()
+      
+    form = EmpleadoForm(instance=empleado)
+
+    return render(request, 'Empleado/empleado_edita.html', {
+        'empleado': empleado,
+        'form': form,
+        'siguiente_empleado': siguiente_empleado,
+        'anterior_empleado': anterior_empleado,
+    })
+    ##Baja empleado
+def empleado_eliminar(request, pk):
+    empleado = get_object_or_404(Empleados, username=pk)
+    empleado.delete()
+    return redirect('empleado')  # Redirige a la página de lista de empleados
+    
+# endregion
 

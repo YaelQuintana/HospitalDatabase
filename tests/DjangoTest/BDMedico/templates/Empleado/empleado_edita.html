@@ -1,0 +1,138 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+  {% extends '../index.html' %}
+  {% block content %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+</head>
+<div class="container">
+  <h2>Detalles del empleado</h2>
+
+  <body>
+    <div class="card">
+      <span class="text-primary float-end"></span>
+      <div class="card">
+        <!-- #region Formulario de edición -->
+        <form method="post" action="{% url 'empleado_detail' pk=empleado.pk %}" id="formulario-edicion">
+          {% csrf_token %}
+          <div id="campo">
+            <label for="{{ form.password.id_for_label }}">Contraseña:</label>
+            {{ form.password }}
+        </div>
+        <br>
+        <div id="campo">
+            <label for="{{ form.name.id_for_label }}">Nombre:</label>
+            {{ form.name }}
+        </div>
+        <br>
+        <div id="campo">
+            <label for="{{ form.surname.id_for_label }}">Apellidos:</label>
+            {{ form.surname }}
+        </div>
+        <br>
+        <div id="campo">
+            <label for="{{ form.birthdate.id_for_label }}">Fecha de Naciemiento:</label>
+            {{ form.birthdate }}
+        </div>
+        <br>
+        <div id="campo">
+            <label for="{{ form.sex.id_for_label }}">Sexo:</label>
+            {{ form.sex }}
+        </div>
+        <br>
+        <div id="campo">
+            <label for="{{ form.address.id_for_label }}">Dirección:</label>
+            {{ form.address }}
+        </div>
+        <br>
+        <div id="campo">
+            <label for="{{ form.phone.id_for_label }}">Teléfono:</label>
+            {{ form.phone }}
+        </div>
+        <br>
+        <div id="campo">
+            <label for="{{ form.description.id_for_label }}">Descripción:</label>
+            {{ form.description }}
+        </div>
+        <br>
+        <div id="campo">
+            <label for="{{ form.puesto.id_for_label }}">Puesto:</label>
+            {{ form.puesto }}
+        </div>
+        <br>
+        <div id="campo">
+            <label for="{{ form.salary.id_for_label }}">Salario:</label>
+            {{ form.salary }}
+        </div>
+        <br>
+        <div id="campo">
+            <label for="{{ form.cedula.id_for_label }}">Cédula:</label>
+            {{ form.cedula }}
+        </div>
+        <br>
+
+
+
+          <!-- #endregion -->
+      </div>
+
+      <div class="d-flex justify-content-between">
+
+        <div>
+          <!-- Botones de navegar -->
+          {% if anterior_empleado %}
+          <a href="{% url 'empleado_editar' pk=anterior_empleado.pk %}"
+            class="btn btn-outline-primary">Anterior</a>
+          {% endif %}
+        </div>
+        <div>
+          <a href="" class="btn btn-warning">Deshacer</a>
+          <button type="submit" id="btn-guardar" class="btn btn-success" id="btn-editar">Guardar</button>
+          <!-- Agrega el atributo 'data-bs-toggle' y 'data-bs-target' para activar el modal -->
+<a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmarEliminacion">Eliminar</a>
+
+<!-- Modal de confirmación de eliminación -->
+<div class="modal fade" id="confirmarEliminacion" tabindex="-1" aria-labelledby="confirmarEliminacionLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmarEliminacionLabel">Confirmar Eliminación</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ¿Estás seguro de que deseas eliminar este empleado?
+            </div>
+            <div class="modal-footer">
+                <!-- Agrega el enlace para eliminar el empleado -->
+                <a href="{% url 'empleado_eliminar' pk=empleado.pk %}" class="btn btn-danger">Eliminar</a>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+        </div>
+        <div>
+          {% if siguiente_empleado %}
+          <a href="{% url 'empleado_editar' pk=siguiente_empleado.pk %}"
+            class="btn btn-outline-primary">Siguiente</a>
+          {% endif %}
+
+        </div>
+        </form>
+        
+      </div>
+      <a href="{% url 'empleado' %}" class="btn btn-primary">Volver</a>
+
+
+      {% endblock %}
+
+  </body>
+
+</html>
