@@ -109,9 +109,9 @@ DATABASES = {
     "default": {
         "ENGINE": "django_tenants.postgresql_backend", #django.db.backends.postgresql
         "NAME": "hospitaladb",
-        "USER": "cryms",
+        "USER": "hospitaladmin",
         "PASSWORD": "1234",
-        "HOST": "127.0.0.1", #post4parra.ddns.net # "post4parra.crabdance.com", ##HOST ALTERNATIVO: "post4parra.ddns.net"
+        "HOST": "rolling-corp.net", #post4parra.ddns.net #  ##HOST ALTERNATIVO: "post4parra.ddns.net"
         "PORT": "5432",
     }
 }
