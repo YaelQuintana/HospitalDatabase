@@ -65,6 +65,8 @@ INSTALLED_APPS = SHARED_APPS +[shared for shared in TENANT_APPS if shared not in
 
 MIDDLEWARE = [
     'django_tenants.middleware.main.TenantMainMiddleware',
+    'django_tenants.routers.TenantSyncRouter',
+    'django_tenants.middleware.main.TenantMainMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -83,6 +85,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.request',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -109,9 +112,9 @@ DATABASES = {
     "default": {
         "ENGINE": "django_tenants.postgresql_backend", #django.db.backends.postgresql
         "NAME": "hospitaladb",
-        "USER": "cryms",
+        "USER": "hospitaladmin",
         "PASSWORD": "1234",
-        "HOST": "127.0.0.1", #post4parra.ddns.net # "post4parra.crabdance.com", ##HOST ALTERNATIVO: "post4parra.ddns.net"
+        "HOST": "post4parra.ddns.net", #post4parra.ddns.net # "post4parra.crabdance.com", ##HOST ALTERNATIVO: "post4parra.ddns.net"
         "PORT": "5432",
     }
 }
