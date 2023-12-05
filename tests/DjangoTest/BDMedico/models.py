@@ -5,14 +5,17 @@ from django.utils.timezone import now
 # Create your models here.
 class Medicamento(models.Model):
     name=models.CharField(max_length=255)
+    marca=models.CharField(max_length=255, default='Generico')
     descripcion=models.TextField()
     units=models.IntegerField()
     precio=models.DecimalField(decimal_places=2,max_digits=10)
-    LOTE=models.CharField(max_length=20)
+    LOTE=models.CharField(max_length=20, unique=True)
     expira=models.DateField()
 
     def __str__(self):
         return self.name
+    
+
 
 
 class Suministro(models.Model):

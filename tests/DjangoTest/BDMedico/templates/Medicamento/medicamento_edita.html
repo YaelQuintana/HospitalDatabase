@@ -12,7 +12,11 @@
 </head>
 <div class="container">
   <h2>Detalles del Medicamento</h2>
-
+  {% if form.errors %}
+  <div style="color: red;">
+      Por favor, verifica los datos del formulario.
+  </div>
+  {% endif %}
   <body>
     <div class="card">
       <span class="text-primary float-end"></span>
