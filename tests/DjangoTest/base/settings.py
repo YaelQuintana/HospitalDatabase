@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-bq79l$vrt+^q$2!sv+d$vq_nkh8%+th2oc^(4*q3!h920w+$+e
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 ##SUPER USER: AdminMamador: Ultramamadas
 # Application definition
@@ -98,20 +98,13 @@ WSGI_APPLICATION = 'base.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-    
-# }
 DATABASES = {
     "default": {
         "ENGINE": "django_tenants.postgresql_backend", #django.db.backends.postgresql
         "NAME": "hospitaladb",
         "USER": "hospitaladmin",
         "PASSWORD": "1234",
-        "HOST": "rolling-corp.net", #post4parra.ddns.net #  ##HOST ALTERNATIVO: "post4parra.ddns.net"
+        "HOST": "201.171.78.112", #"rolling-corp.net", #post4parra.ddns.net #  ##HOST ALTERNATIVO: "rollingcorp.net"
         "PORT": "5432",
     }
 }

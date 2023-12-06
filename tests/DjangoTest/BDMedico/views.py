@@ -7,7 +7,8 @@ from django.db.models import Q
 ##from django.http import HttpResponse
 # Create your views here.
 
-
+def admin(request):
+    return render(request,'admin/')
 def index(request):
     ##Here is the data that will be read
     testss=Test.objects.all()

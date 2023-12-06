@@ -23,6 +23,6 @@ urlpatterns=[
     path('suministro/<int:pk>/eliminar/', suministro_eliminar, name='suministro_eliminar'),
     path('suministro/nuevo/',alta_suministro,name='alta_suministro'),
     path('suministro/',suministro,name='suministro'),
-
+    path('admin/',admin,name='admin'),
 
 ]
