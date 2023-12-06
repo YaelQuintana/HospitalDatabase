@@ -1,0 +1,139 @@
+{% block content %}
+<div id="Dashboard">
+    <div class="Title">Dashboard</div>
+
+    <div class="tabular-wrapper">
+
+
+        <div>
+            <a href="{% url 'alta_medicamento' %}" class="btn btn-danger float-end">Agregar Medicamento</a>
+
+            <h3 class="main-title">Medicamentos</h3>
+
+            <p>Hay {{ caducidad|length }} medicamentos que revisar</p>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Unidades</th>
+                            <th>Precio</th>
+                            <th>Fecha de Expiración</th>
+                            <th>Marca</th>
+                            <th>Detalles</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for medicamento in caducidad %}
+
+
+                        <tr>
+                            <td>{{ medicamento.name }}</td>
+                            <td class="{% if medicamento.units <= 5 %} expira-units {% endif %}">{{ medicamento.units }}
+                            </td>
+                            <td>{{ medicamento.precio }}</td>
+                            <td class="{% if medicamento.expira < fecha_actual %} expira-fecha {% endif %}">
+                                {{ medicamento.expira }}</td>
+                            <td>{{ medicamento.marca }}</td>
+                            <td><a href="{% url 'medicamento_detail' medicamento.id %}">Detalles</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="tabular-wrapper">
+
+
+        <div>
+            <a href="{% url 'alta_empleado' %}" class="btn btn-danger float-end">Agregar Empleado</a>
+
+            <h3 class="main-title">Empleados nuevos</h3>
+            {% if empleado %}
+            <p>Hay {{ empleado|length }} empleados en total</p>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <th>Nombre</th>
+                        <th>Usuario</th>
+                        <th>F.Nac</th>
+                        <th>Sexo</th>
+                        <th>Cedula</th>
+                        <th>Detalle</th>
+                    </thead>
+                    <tbody>
+                        {% for x in empleado%}
+                        <tr>
+                            <td>{{ x.name }}</td>
+                            <td>{{ x.username }}</td>
+                            <td>{{ x.birthdate }}</td>
+                            <td>{{ x.sex }}</td>
+                            <td>{{ x.cedula }}</td>
+                            <td><a href="{% url 'empleado_detail' x.username %}">Detalles</a>
+                            </td>
+                        </tr>
+
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+            {% else %}
+            <p>No hay empleados nuevos</p>
+            {% endif %}
+
+        </div>
+    </div>
+
+
+    <div class="tabular-wrapper">
+
+
+        <div>
+            <a href="{% url 'alta_suministro' %}" class="btn btn-danger float-end">Agregar Suministro</a>
+
+            <h3 class="main-title">Suministros</h3>
+
+            <p>Hay {{ suministro|length }} suministro que revisar</p>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Unidades</th>
+                            <th>Precio</th>
+                            <th>Fecha de Expiración</th>
+                            <th>Desechable</th>
+                            <th>Detalles</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for s in suministro %}
+
+
+                        <tr>
+                            <td>{{ s.name }}</td>
+                            <td class="{% if s.units <= 5 %} expira-units {% endif %}">{{ s.units }}
+                            </td>
+                            <td>{{ s.precio }}</td>
+                            <td class="{% if s.expira < fecha_actual %} expira-fecha {% endif %}">
+                                {{ s.expira }}</td>
+                            <td>{{ s.desechable }}</td>
+                            <td><a href="{% url 'suministro_detail' s.id %}">Detalles</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

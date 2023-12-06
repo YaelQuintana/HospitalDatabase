@@ -51,12 +51,11 @@ crossorigin="anonymous"></script>
     
     <div id = "content", name = "content", class = "main">
         {% block content %}
-        {% endblock %}
-    </div>
 
-    <!--script src="{% static 'BDMedico/childPage.js' %}"></script-->
-   
-  
+        {% include 'Dashboard/dashboard.html' %}
+        
+        {% endblock %}
+    </div>   
 
 </body>
 </html>

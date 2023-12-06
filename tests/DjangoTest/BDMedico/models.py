@@ -1,20 +1,20 @@
 from django.db import models
-from django.utils.timezone import now
+from django.core.validators import RegexValidator
 
 
 # Create your models here.
 class Medicamento(models.Model):
-    name=models.CharField(max_length=255)
-    marca=models.CharField(max_length=255, default='Generico')
-    descripcion=models.TextField()
-    units=models.IntegerField()
-    precio=models.DecimalField(decimal_places=2,max_digits=10)
-    LOTE=models.CharField(max_length=20, unique=True)
-    expira=models.DateField()
+    name = models.CharField(max_length=255)
+    descripcion = models.TextField()
+    precio = models.DecimalField(decimal_places=2, max_digits=10)
+    units = models.IntegerField()
+    LOTE = models.CharField(max_length=20, unique=True)
+    expira = models.DateField()
+    marca = models.CharField(max_length=255, default='Generico')
 
     def __str__(self):
         return self.name
-    
+
 
 
 
@@ -37,15 +37,21 @@ class Empleados(models.Model):
     name = models.CharField(max_length=255)
     surname = models.CharField(max_length=255)
     birthdate = models.DateField()
-    sex = models.CharField(max_length=10)
+    sex = models.CharField(max_length=20)
     address = models.CharField(max_length=255, default="")
-    phone = models.CharField(max_length=20, unique=True)
     description = models.TextField()
     puesto = models.CharField(max_length=255)
     salary = models.DecimalField(decimal_places=2, max_digits=10)
     contratacion_date = models.DateTimeField(auto_now_add=True, blank=True)
-    cedula = models.CharField(max_length=255)
+    cedula = models.CharField(max_length=255,unique=True)
 
+
+    phone = models.CharField(
+        max_length=20,
+        unique=True, 
+        validators=[RegexValidator(regex=r'^[0-9#+]*$', message='Solo se permiten números, letras, "#" y "+"')],
+   
+    )
 
     SEXO_CHOICES = [
         ('M', 'Masculino'),

@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from .forms import MedicamentoForm, EmpleadoForm, SuministroForm
+from datetime import date,datetime, timedelta
+from django.db.models import Q
 
 ##from django.http import HttpResponse
 # Create your views here.
@@ -9,10 +11,25 @@ from .forms import MedicamentoForm, EmpleadoForm, SuministroForm
 def index(request):
     ##Here is the data that will be read
     testss=Test.objects.all()
+
+    fechamas30=date.today()+ timedelta(days=30)
+    fechamen30=date.today()- timedelta(days=30)
+    medicamento = Medicamento.objects.filter(Q(expira__lte=fechamas30)| Q(units__lte=5))
+    empleado= Empleados.objects.filter(contratacion_date__gte=fechamen30)
+    suministro = Suministro.objects.filter(Q(expira__lte=fechamas30)| Q(units__lte=5))
+    
     context={
-        'tests':testss
+        'empleado':empleado,
+        'tests':testss,
+        'caducidad':medicamento,
+        'fecha_actual':fechamas30,
+        'suministro':suministro,
+
     }
     return render(request,'index.html',context)
+
+
+
 
 def informes(request):
     medicamento=Medicamento.objects.all()

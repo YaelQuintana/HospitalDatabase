@@ -6,7 +6,7 @@ from .models import Medicamento, Empleados, Suministro
 class MedicamentoForm(forms.ModelForm):
     class Meta:
         model = Medicamento
-        fields = ['name', 'descripcion', 'precio','units','LOTE','expira']
+        fields = ['name', 'descripcion', 'precio','units','LOTE','expira','marca']
         # Puedes agregar más campos según tus necesidades
         widgets = {
             'expira': forms.DateInput(attrs={'type': 'date'}),
