@@ -77,7 +77,7 @@ class Empleados(models.Model):
         ('conserje', 'Conserje'),
         ('otro', 'Otro'),
 
-        # Agrega más opciones según tus necesidades
+        # Agregar más opciones si así se requiere
     ]
     puesto = models.CharField(max_length=20, choices=PUESTO_CHOICES)
     def __str__(self):
